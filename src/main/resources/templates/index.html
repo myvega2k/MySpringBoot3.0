@@ -9,6 +9,7 @@
         <th>Email</th>
         <th>EntryDate</th>
         <th>Update</th>
+        <th>Delete</th>
     </tr>
     <tr th:each="user, userStat : ${users}">
         <td th:text="${userStat.count}"></td>
@@ -16,6 +17,7 @@
         <td th:text="${user.email}"></td>
         <td th:text="${#temporals.format(user.createdAt,'yyyy-MM-dd hh:mm')}"></td>
         <td><a th:href="@{/userspage/edit/{id}(id=${user.id})}">Update</a></td>
+        <td><a th:href="@{/userspage/delete/{id}(id=${user.id})}">delete</a></td>
     </tr>
 </table>
 <p><a href="/userspage/signup">Insert</a></p>

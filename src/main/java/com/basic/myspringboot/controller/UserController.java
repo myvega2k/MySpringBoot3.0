@@ -25,14 +25,14 @@ public class UserController {
 
     @GetMapping("/first")
     public String leaf(Model model) {
-        model.addAttribute("name","스프링부트");
+        model.addAttribute("name", "스프링부트");
         return "leaf";
     }
 
     @GetMapping("/index")
     public ModelAndView index() {
         List<UserResDTO> userResDTOList = userService.getUsers();
-        return new ModelAndView("index","users",userResDTOList);
+        return new ModelAndView("index", "users", userResDTOList);
     }
 
     //등록 페이지를 호출 해주는 메서드
@@ -54,9 +54,10 @@ public class UserController {
         //return "index";
         return "redirect:/userspage/index";
     }
+
     //수정 페이지를 호출 해주는 메서드
     @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable Long id, Model model){
+    public String showUpdateForm(@PathVariable Long id, Model model) {
         UserResDTO userResDTO = userService.getUserById(id);
         model.addAttribute("user", userResDTO);
         return "update-user";
@@ -66,9 +67,7 @@ public class UserController {
     public String updateUser(@PathVariable("id") Long id, @Valid UserReqForm user,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
-            System.out.println(">>>> hasErrors user " + user);
             model.addAttribute("user", user);
-            //user.setId(id);
             return "update-user";
             //return "redirect:/userspage/edit/{id}(id=${user.id})";
         }
@@ -77,5 +76,10 @@ public class UserController {
         return "redirect:/userspage/index";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
+        return "redirect:/userspage/index";
+    }
 
 }
