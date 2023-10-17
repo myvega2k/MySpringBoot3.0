@@ -3,15 +3,15 @@ package com.basic.myspringboot.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class UserReqDTO {
+@ToString
+public class UserReqForm {
+    private Long id;
+
     @NotEmpty(message = "Name은 필수 입력항목입니다.") //" " 허용
     private String name;
 
