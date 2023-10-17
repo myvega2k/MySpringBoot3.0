@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -66,10 +67,12 @@ public class UserController {
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") Long id, @Valid UserReqForm user,
                              BindingResult result, Model model) {
+                             //RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "update-user";
-            //return "redirect:/userspage/edit/{id}(id=${user.id})";
+            //redirectAttributes.addAttribute("id", id);
+            //return "redirect:/userspage/edit/{id}";
         }
         userService.updateUserForm(user);
 
